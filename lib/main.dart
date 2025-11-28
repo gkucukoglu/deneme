@@ -28,13 +28,13 @@ class QuizQuestion {
   final String question;
   final List<String> options;
   final int correctAnswerIndex;
-  // final String? imageUrl; // Resim yolu (opsiyonel) - GEÇİCİ OLARAK DEVRE DIŞI
+  final String? imageUrl; // Resim yolu (opsiyonel)
 
   const QuizQuestion({
     required this.question,
     required this.options,
     required this.correctAnswerIndex,
-    // this.imageUrl, // Constructor'a eklendi - GEÇİCİ OLARAK DEVRE DIŞI
+    this.imageUrl, // Constructor'a eklendi
   });
 }
 
@@ -45,7 +45,7 @@ const Map<String, Map<String, QuizQuestion>> topicsData = {
       question: 'Fiziksel katmanın temel görevi nedir?',
       options: ['Veriyi paketlere bölmek', 'Bitleri bir ortam üzerinden iletmek', 'Ağ yolunu bulmak', 'Veriyi şifrelemek'],
       correctAnswerIndex: 1,
-      // imageUrl: 'assets/osi_model.png', // Örnek resim yolu - GEÇİCİ OLARAK DEVRE DIŞI
+      imageUrl: 'assets/images/fiziksel.png', // Örnek resim yolu
     ),
     'Veri Bağlantı Katmanı': QuizQuestion(
       question: 'MAC adresi hangi katmanda bulunur ve ne işe yarar?',
@@ -268,27 +268,27 @@ class _QuizPageState extends State<QuizPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // if (currentQuestion.imageUrl != null) // GEÇİCİ OLARAK DEVRE DIŞI
-              //   Padding(
-              //     padding: const EdgeInsets.only(bottom: 16.0),
-              //     child: Container(
-              //       height: 200,
-              //       decoration: BoxDecoration(
-              //         border: Border.all(color: Colors.grey),
-              //         borderRadius: BorderRadius.circular(8),
-              //       ),
-              //       child: ClipRRect(
-              //         borderRadius: BorderRadius.circular(8),
-              //         child: Image.asset(
-              //           currentQuestion.imageUrl!,
-              //           fit: BoxFit.contain,
-              //           errorBuilder: (context, error, stackTrace) {
-              //             return const Center(child: Icon(Icons.image_not_supported, size: 50));
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //   ),
+              if (currentQuestion.imageUrl != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Container(
+                    height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        currentQuestion.imageUrl!,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(child: Icon(Icons.image_not_supported, size: 50));
+                        },
+                      ),
+                    ),
+                  ),
+                ),
               Text(
                 'Soru ${ _currentQuestionIndex + 1}/${_questions.length}: ${currentQuestion.question}',
                 style: Theme.of(context).textTheme.headlineSmall,
